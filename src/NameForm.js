@@ -11,10 +11,10 @@ export class NameForm extends React.Component {
     this.setState({ value: newWord });
   }
 
-  toRandomCase (text) {
-    var ret = '';
-    for (var i = 0; i < text.length; i++) {
-        var char = text[i].toLowerCase();
+  static toRandomCase (text) {
+    let ret = '';
+    for (let i = 0; i < text.length; i++) {
+        let char = text[i].toLowerCase();
         if (Math.random()<0.5) {
             ret += char;
         }
@@ -28,8 +28,8 @@ export class NameForm extends React.Component {
   render() {
     return (
     <form onSubmit={this.handleSubmit}>
-    <span class="input">
-      <input type="text" value={this.state.value} onChange={this.handleChange} />
+    <span >
+      <textarea value={this.state.value} onChange={this.handleChange} />
       </span>
     </form>);
   }
