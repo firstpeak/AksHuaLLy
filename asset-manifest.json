@@ -1,16 +1,15 @@
 {
   "files": {
-    "main.css": "/AksHuaLLy/static/css/main.c778b421.chunk.css",
-    "main.js": "/AksHuaLLy/static/js/main.adec0b9e.chunk.js",
-    "main.js.map": "/AksHuaLLy/static/js/main.adec0b9e.chunk.js.map",
-    "runtime~main.js": "/AksHuaLLy/static/js/runtime~main.342cc4b4.js",
-    "runtime~main.js.map": "/AksHuaLLy/static/js/runtime~main.342cc4b4.js.map",
-    "static/js/2.4e81ba5b.chunk.js": "/AksHuaLLy/static/js/2.4e81ba5b.chunk.js",
-    "static/js/2.4e81ba5b.chunk.js.map": "/AksHuaLLy/static/js/2.4e81ba5b.chunk.js.map",
-    "index.html": "/AksHuaLLy/index.html",
-    "precache-manifest.279d96ef2aeb16813386ed38b590c029.js": "/AksHuaLLy/precache-manifest.279d96ef2aeb16813386ed38b590c029.js",
-    "service-worker.js": "/AksHuaLLy/service-worker.js",
-    "static/css/main.c778b421.chunk.css.map": "/AksHuaLLy/static/css/main.c778b421.chunk.css.map",
-    "static/media/logo.svg": "/AksHuaLLy/static/media/logo.5d5d9eef.svg"
+    "main.css": "www.akshually.com/static/css/main.c778b421.chunk.css",
+    "main.js": "www.akshually.com/static/js/main.e037c457.chunk.js",
+    "main.js.map": "www.akshually.com/static/js/main.e037c457.chunk.js.map",
+    "runtime~main.js": "www.akshually.com/static/js/runtime~main.7aae395d.js",
+    "runtime~main.js.map": "www.akshually.com/static/js/runtime~main.7aae395d.js.map",
+    "static/js/2.4e81ba5b.chunk.js": "www.akshually.com/static/js/2.4e81ba5b.chunk.js",
+    "static/js/2.4e81ba5b.chunk.js.map": "www.akshually.com/static/js/2.4e81ba5b.chunk.js.map",
+    "index.html": "www.akshually.com/index.html",
+    "precache-manifest.c8932cb066dc03905b4115175669109e.js": "www.akshually.com/precache-manifest.c8932cb066dc03905b4115175669109e.js",
+    "service-worker.js": "www.akshually.com/service-worker.js",
+    "static/css/main.c778b421.chunk.css.map": "www.akshually.com/static/css/main.c778b421.chunk.css.map"
   }
 }
