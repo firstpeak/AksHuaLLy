@@ -1,10 +1,14 @@
 <!DOCTYPE html>
+
+<html lang="en">
 <style>
-  html {background-color: black;}
+  html {
+    background: black
+  }
 
   body {
-      text-align: center;
-      background-color: black;
+    text-align: center;
+    background-color: black;
     display:flex;
     justify-content: center;
     height:100%;
@@ -30,7 +34,6 @@
     font-size: 6vw;
   }
 </style>
-<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -41,8 +44,7 @@
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div>
     <H1 id="title">AksHuaLly</H1>
-
-    <span><textarea id="field1" ></textarea>   </span>
+      <textarea id="field1"></textarea>
 
     <script type="text/javascript">
 
@@ -75,5 +77,6 @@
       document.getElementById("field1").addEventListener("keypress", forceKeyPressUppercase, false);
 
     </script>
+    </div>
   </body>
 </html>
