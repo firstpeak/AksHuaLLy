@@ -7,8 +7,8 @@ export class NameForm extends React.Component {
   }
 
   handleChange(event) {
-      var newWord = this.toRandomCase(event.target.value);
-    this.setState({ value: newWord });
+      let newWord = NameForm.toRandomCase(event.target.value);
+      this.setState({ value: newWord });
   }
 
   static toRandomCase (text) {
