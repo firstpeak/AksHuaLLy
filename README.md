@@ -2,4 +2,4 @@
 
 creates akshually mix case text
 
-#todo: fix deployment build to /akshually/ directory
+visit at www.akshually.com 
