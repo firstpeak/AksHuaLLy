@@ -53,8 +53,7 @@
       function strToAksHuALly(e)
       {
         var charInput = e.keyCode;
-        if((charInput >= 97) && (charInput <= 122)) { // lowercase
-          if(!e.ctrlKey && !e.metaKey && !e.altKey) { // no modifier key
+        if((((charInput >= 65) && (charInput <= 90)) || ((charInput >= 97) && (charInput <= 122))) && !e.ctrlKey && !e.metaKey && !e.altKey) { // no modifier key
             var newChar = charInput - 32;
             var start = e.target.selectionStart;
             var end = e.target.selectionEnd;
@@ -72,7 +71,7 @@
             e.target.value = ret;
             e.target.setSelectionRange(start+1, start+1);
             e.preventDefault();
-          }
+          
         }
       }
 
