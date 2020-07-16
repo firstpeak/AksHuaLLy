@@ -64,7 +64,7 @@
             let ret = '';
             for (let i = 0; i < e.target.value.length; i++) {
               let char = e.target.value[i].toLowerCase();
-              currentContiguous >= maxContiguous ? previousCase == 'l' ? nextWeight = 0.92 : nextWeight = 0.1 : nextWeight = 0.5;
+              currentContiguous >= maxContiguous ? previousCase == 'l' ? nextWeight = 0.1 : nextWeight = 0.92 : nextWeight = 0.5;
               if (Math.random() < nextWeight) {
                 previousCase == 'l' ? currentContiguous++ : currentContiguous=0;
                 previousCase='l';
