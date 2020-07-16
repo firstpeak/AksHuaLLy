@@ -54,25 +54,22 @@
       {
         var maxContiguous = 2;
         var charInput = e.keyCode;
+        var nextWeight = 0.5;
         if((((charInput >= 65) && (charInput <= 90)) || ((charInput >= 97) && (charInput <= 122))) && !e.ctrlKey && !e.metaKey && !e.altKey) { // no modifier key
             var start = e.target.selectionStart;
             var end = e.target.selectionEnd;
-            var previousCase = 'l';
-            var currentContiguous = 0;
-            var nextWeight = 0.5;
             e.target.value = e.target.value.substring(0, start) + String.fromCharCode(charInput) + e.target.value.substring(end);
             let ret = '';
             for (let i = 0; i < e.target.value.length; i++) {
               let char = e.target.value[i].toLowerCase();
-              currentContiguous >= maxContiguous ? previousCase == 'l' ? nextWeight = 0.1 : nextWeight = 0.92 : nextWeight = 0.5;
               if (Math.random() < nextWeight) {
-                previousCase == 'l' ? currentContiguous++ : currentContiguous=0;
-                previousCase='l';
-                ret += char;
+				nextWeight= 0.5 - (nextWeight* 0.5);
+				//console.log('l:' + nextWeight);
+                ret = ret + char;
               }
               else {
-                previousCase == 'u' ? currentContiguous++ : currentContiguous=0;
-                previousCase='u';
+				nextWeight= 0.5 + (nextWeight * 0.5);
+				//console.log('u:' + nextWeight);
                 ret += char.toUpperCase();
               }
             }
