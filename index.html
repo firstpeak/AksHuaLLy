@@ -18,7 +18,28 @@
         background: linear-gradient(21deg, #10abff, #1beabd);
         padding: 3px;
       }
-
+	  
+      label {
+        resize: none;
+        position:left;
+        font-size: 11px;
+        color: gray;
+      }
+	  
+      input {
+        resize: none;
+        position:relative;
+        font-size: 11px;
+		background-color: black;
+		color: gray;
+		border: darkgray;
+      }
+	  
+	  #explain {
+        font-size: 9px;
+        color: gray;
+	  }
+	  
       #title {
         background: red;
         background: -webkit-linear-gradient(left, orange , yellow, green, cyan, blue, violet);
@@ -42,35 +63,61 @@
     <title>AksHuAlLy</title>
   </head>
   <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <noscript>yOu NEED To eNABLe jAvAscRiPt to GEt AkSHuAlLY TExT</noscript>
     <div id="wide">
     <H1 id="title">AksHuaLly</H1>
-
-    <textarea id="field1" placeholder="           tYpE HeRe To GeT AkShuAlLy TeXt 
-       DoN't fOrTeT tO VOte oN TUeSdAy NoVeMbER 10, 2020!"></textarea>
-
+    <textarea id="field1" placeholder="           tYpE HeRe To GeT AkShuAlLy TeXt"></textarea>
+	   <br>
+		<label for="FlopFactor">Change Case (between 1 and 9):</label>
+		<input type="number" id="FlopFactor" name="quantity" min="1" max="9" step="1" value="5" size="1">
+		<span id="explain">(lIkElihOOD OF matCh wHEn PReViOus dO noT maTCH)</span>
+	   <br>
+		<label for="RunFactor">Shorter Runs (between 1 and 9):</label>
+		<input type="number" id="RunFactor" name="quantity" min="1" max="9" step="1"  value="5" size="1">
+		<span id="explain">(LiKelIhOoD OF mAtCh When PRevIoUs mAtCh)</span>
     <script type="text/javascript">
 
       function strToAksHuALly(e)
       {
         var maxContiguous = 2;
         var charInput = e.keyCode;
-        var nextWeight = 0.5;
+        var nextWeight = 0.45;
+		var flopWeight = 0.12
+		flopWeight = document.getElementById("FlopFactor").value/50;
+		nextWeight = 0.5 - flopWeight;
+		var weightIndex = 0.50 
+		weightIndex = ((document.getElementById("RunFactor").value * document.getElementById("RunFactor").value / 120));
+		var lastWasLower = true;
         if((((charInput >= 65) && (charInput <= 90)) || ((charInput >= 97) && (charInput <= 122))) && !e.ctrlKey && !e.metaKey && !e.altKey) { // no modifier key
             var start = e.target.selectionStart;
             var end = e.target.selectionEnd;
             e.target.value = e.target.value.substring(0, start) + String.fromCharCode(charInput) + e.target.value.substring(end);
             let ret = '';
+			let nextProb = Math.random();
             for (let i = 0; i < e.target.value.length; i++) {
               let char = e.target.value[i].toLowerCase();
-              if (Math.random() < nextWeight) {
-				nextWeight= 0.5 - (nextWeight* 0.5);
-				//console.log('l:' + nextWeight);
+			  nextProb = Math.random();
+			  // console.log('nextProb:' + nextProb + ', nextWeight:' + nextWeight);
+              if (nextProb < nextWeight) { 			// this char will be lower
+				if (lastWasLower==true){
+					nextWeight=(nextWeight - (weightIndex * nextWeight));
+				}
+				else{
+					nextWeight=0.5 - flopWeight;
+				};
+				lastWasLower = true;
+				// console.log('l:' + lastWasLower + ":" + nextWeight);
                 ret = ret + char;
               }
-              else {
-				nextWeight= 0.5 + (nextWeight * 0.5);
-				//console.log('u:' + nextWeight);
+              else {								// this char will be upper	
+				if (lastWasLower==true){
+				nextWeight=0.5 + flopWeight;
+				}
+				else{
+				nextWeight=(nextWeight + (1 - nextWeight) * weightIndex);
+				}
+				lastWasLower = false;
+				// console.log('u:' + lastWasLower + ":" + nextWeight);
                 ret += char.toUpperCase();
               }
             }
