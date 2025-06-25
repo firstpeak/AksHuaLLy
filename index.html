@@ -10,13 +10,23 @@
       }
 
       textarea {
-        resize: none;
+        resize: vertical;
         position:relative;
         font-size: 1.5em;
         width: 70%;
-        height: 140%;
+        height: 35vh;
+        min-height: 120px;
+        max-height: 80vh;
         background: linear-gradient(21deg, #10abff, #1beabd);
         padding: 3px;
+        border: 2px solid rgba(16, 171, 255, 0.3);
+        border-radius: 5px;
+        outline: none;
+        transition: border-color 0.3s ease;
+      }
+      
+      textarea:focus {
+        border-color: rgba(16, 171, 255, 0.8);
       }
 	  
       label {
@@ -40,6 +50,79 @@
         color: gray;
 	  }
 	  
+	  .controls-section {
+		margin: 20px 0;
+		padding: 15px;
+		background: rgba(40, 40, 40, 0.8);
+		border-radius: 10px;
+		width: 70%;
+		margin-left: auto;
+		margin-right: auto;
+	  }
+	  
+	  .control-group {
+		margin: 10px 0;
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		flex-wrap: wrap;
+	  }
+	  
+	  .control-group label {
+		min-width: 180px;
+		text-align: left;
+	  }
+	  
+	  .control-group input[type="range"] {
+		flex: 1;
+		min-width: 120px;
+		max-width: 200px;
+	  }
+	  
+	  .control-value {
+		min-width: 30px;
+		font-weight: bold;
+		color: #10abff;
+	  }
+	  
+	  .explain {
+		font-size: 9px;
+		color: gray;
+		font-style: italic;
+	  }
+	  
+	  .preset-buttons {
+		margin: 15px 0;
+		display: flex;
+		gap: 10px;
+		justify-content: center;
+		flex-wrap: wrap;
+	  }
+	  
+	  .preset-buttons button {
+		padding: 8px 16px;
+		background: linear-gradient(45deg, #10abff, #1beabd);
+		color: black;
+		border: none;
+		border-radius: 5px;
+		cursor: pointer;
+		font-weight: bold;
+		transition: transform 0.2s;
+	  }
+	  
+	  .preset-buttons button:hover {
+		transform: scale(1.05);
+	  }
+	  
+	  .stats-display {
+		margin: 10px 0;
+		padding: 10px;
+		background: rgba(20, 20, 20, 0.8);
+		border-radius: 5px;
+		font-size: 11px;
+		color: #1beabd;
+	  }
+	  
       #title {
         background: red;
         background: -webkit-linear-gradient(left, orange , yellow, green, cyan, blue, violet);
@@ -47,9 +130,10 @@
         background: -moz-linear-gradient(right, orange, yellow, green, cyan, blue, violet);
         background: linear-gradient(to right, orange , yellow, green, cyan, blue, violet);
         -webkit-background-clip: text;
+        background-clip: text;
         -webkit-text-fill-color: transparent;
-        font-size: 6vw;
-	margin-bottom: auto;
+        font-size: 5vw;
+        margin: 10px 0;
       }
 
       #description {
@@ -59,8 +143,10 @@
         background: -moz-linear-gradient(right, cyan, blue, violet, orange , yellow, green);
         background: linear-gradient(to right, cyan, blue, violet, orange , yellow, green);
         -webkit-background-clip: text;
+        background-clip: text;
         -webkit-text-fill-color: transparent;
-        font-size: 2vw;
+        font-size: 1.8vw;
+        margin: 5px 0 15px 0;
       }
 	    
       #wide{
@@ -119,66 +205,378 @@
     CulTurAL IMpAcT:
     BoTH mEMes ARe wiDelY USed tO RIdiCulE PeOPle wHo tAKE TriViaL CoRrECtnESS TOo SerIoUSLy, esPEcIaLly oN SoCiAL MediA, whERE dEBatEs oftEN geT DeRAiLED by UNneceSsaRy corRecTiOnS. howEveR, The MOckInG SpOnGeBob MEmE IS More fLeXibLE AND CaN bE aPplIEd bEyoND jUsT PeDaNtRY—IT'S usEd for moCKing AnY sTaTemENt That SoUndS FoOlISh, nAIvE, oR coNdesCeNDInG.'></textarea>
 	   <br>
-		<label for="FlopFactor">Change Case (between 1 and 9):</label>
-		<input type="number" id="FlopFactor" name="quantity" min="1" max="9" step="1" value="5" size="1">
-		<span id="explain">(lIkElihOOD OF matCh wHEn PReViOus dO noT maTCH)</span>
-	   <br>
-		<label for="RunFactor">Shorter Runs (between 1 and 9):</label>
-		<input type="number" id="RunFactor" name="quantity" min="1" max="9" step="1"  value="5" size="1">
-		<span id="explain">(LiKelIhOoD OF mAtCh When PRevIoUs mAtCh)</span>
+		<div class="controls-section">
+			<div class="control-group">
+				<label for="FlopFactor">Case Change Rate (1-9):</label>
+				<input type="range" id="FlopFactor" min="1" max="9" step="1" value="5">
+				<span class="control-value" id="FlopValue">5</span>
+				<span class="explain">(hOw OfTeN cAsE cHaNgEs)</span>
+			</div>
+			
+			<div class="control-group">
+				<label for="RunFactor">Run Length Control (1-9):</label>
+				<input type="range" id="RunFactor" min="1" max="9" step="1" value="5">
+				<span class="control-value" id="RunValue">5</span>
+				<span class="explain">(sHoRtEr Or LoNgEr RuNs)</span>
+			</div>
+			
+			<div class="control-group">
+				<label for="MaxRunLength">Max Same Case (2-8):</label>
+				<input type="range" id="MaxRunLength" min="2" max="8" step="1" value="4">
+				<span class="control-value" id="MaxRunValue">4</span>
+				<span class="explain">(mAx CoNsEcUtIvE sAmE cAsE)</span>
+			</div>
+			
+			<div class="control-group">
+				<label for="WordBoundaryBias">Word Start Bias (0-100%):</label>
+				<input type="range" id="WordBoundaryBias" min="0" max="100" step="10" value="70">
+				<span class="control-value" id="WordBoundaryValue">70%</span>
+				<span class="explain">(cHaNgE cAsE aT wOrD sTaRt)</span>
+			</div>
+			
+			<div class="control-group">
+				<label for="VowelBias">Vowel Emphasis (0-100%):</label>
+				<input type="range" id="VowelBias" min="0" max="100" step="10" value="50">
+				<span class="control-value" id="VowelValue">50%</span>
+				<span class="explain">(EmPhAsIzE vOwElS)</span>
+			</div>
+			
+			<div class="preset-buttons">
+				<button type="button" id="AggressivePreset">aGgReSsIvE</button>
+				<button type="button" id="BalancedPreset">BaLaNcEd</button>
+				<button type="button" id="SubtlePreset">sUbTlE</button>
+				<button type="button" id="RandomizePreset">RaNdOmIzE</button>
+			</div>
+			
+			<div class="stats-display">
+				<span id="StatsDisplay">tYpE tO sEe StAtS</span>
+			</div>
+		</div>
     <script type="text/javascript">
+      // Enhanced AksHuaLly text transformation algorithm
+      class AksHuaLlyTransformer {
+        constructor() {
+          this.context = {
+            lastCase: 'lower',
+            runLength: 0,
+            probability: 0.5,
+            lastWordCase: null,
+            position: 0
+          };
+          this.stats = {
+            upperCount: 0,
+            lowerCount: 0,
+            longestRun: 0,
+            currentRun: 0,
+            words: 0
+          };
+          this.vowels = new Set(['a', 'e', 'i', 'o', 'u']);
+          this.setupEventListeners();
+          this.updateControlValues();
+        }
 
-      function strToAksHuALly(e)
-      {
-        var maxContiguous = 2;
-        var charInput = e.keyCode;
-        var nextWeight = 0.45;
-		var flopWeight = 0.12
-		flopWeight = document.getElementById("FlopFactor").value/50;
-		nextWeight = 0.5 - flopWeight;
-		var weightIndex = 0.50 
-		weightIndex = ((document.getElementById("RunFactor").value * document.getElementById("RunFactor").value / 120));
-		var lastWasLower = true;
-        if((((charInput >= 65) && (charInput <= 90)) || ((charInput >= 97) && (charInput <= 122))) && !e.ctrlKey && !e.metaKey && !e.altKey) { // no modifier key
-            var start = e.target.selectionStart;
-            var end = e.target.selectionEnd;
-            e.target.value = e.target.value.substring(0, start) + String.fromCharCode(charInput) + e.target.value.substring(end);
-            let ret = '';
-			let nextProb = Math.random();
-            for (let i = 0; i < e.target.value.length; i++) {
-              let char = e.target.value[i].toLowerCase();
-			  nextProb = Math.random();
-			  // console.log('nextProb:' + nextProb + ', nextWeight:' + nextWeight);
-              if (nextProb < nextWeight) { 			// this char will be lower
-				if (lastWasLower==true){
-					nextWeight=(nextWeight - (weightIndex * nextWeight));
-				}
-				else{
-					nextWeight=0.5 - flopWeight;
-				};
-				lastWasLower = true;
-				// console.log('l:' + lastWasLower + ":" + nextWeight);
-                ret = ret + char;
-              }
-              else {								// this char will be upper	
-				if (lastWasLower==true){
-				nextWeight=0.5 + flopWeight;
-				}
-				else{
-				nextWeight=(nextWeight + (1 - nextWeight) * weightIndex);
-				}
-				lastWasLower = false;
-				// console.log('u:' + lastWasLower + ":" + nextWeight);
-                ret += char.toUpperCase();
-              }
+        getSettings() {
+          return {
+            flopFactor: parseInt(document.getElementById("FlopFactor").value),
+            runFactor: parseInt(document.getElementById("RunFactor").value),
+            maxRunLength: parseInt(document.getElementById("MaxRunLength").value),
+            wordBoundaryBias: parseInt(document.getElementById("WordBoundaryBias").value) / 100,
+            vowelBias: parseInt(document.getElementById("VowelBias").value) / 100
+          };
+        }
+
+        setupEventListeners() {
+          // Update control value displays and retransform text
+          document.getElementById("FlopFactor").addEventListener("input", () => {
+            this.updateControlValues();
+            this.retransformExistingText();
+          });
+          document.getElementById("RunFactor").addEventListener("input", () => {
+            this.updateControlValues();
+            this.retransformExistingText();
+          });
+          document.getElementById("MaxRunLength").addEventListener("input", () => {
+            this.updateControlValues();
+            this.retransformExistingText();
+          });
+          document.getElementById("WordBoundaryBias").addEventListener("input", () => {
+            this.updateControlValues();
+            this.retransformExistingText();
+          });
+          document.getElementById("VowelBias").addEventListener("input", () => {
+            this.updateControlValues();
+            this.retransformExistingText();
+          });
+
+          // Preset buttons with retransform
+          document.getElementById("AggressivePreset").addEventListener("click", () => {
+            this.setPreset("aggressive");
+            this.retransformExistingText();
+          });
+          document.getElementById("BalancedPreset").addEventListener("click", () => {
+            this.setPreset("balanced");
+            this.retransformExistingText();
+          });
+          document.getElementById("SubtlePreset").addEventListener("click", () => {
+            this.setPreset("subtle");
+            this.retransformExistingText();
+          });
+          document.getElementById("RandomizePreset").addEventListener("click", () => {
+            this.setPreset("random");
+            this.retransformExistingText();
+          });
+        }
+
+        updateControlValues() {
+          document.getElementById("FlopValue").textContent = document.getElementById("FlopFactor").value;
+          document.getElementById("RunValue").textContent = document.getElementById("RunFactor").value;
+          document.getElementById("MaxRunValue").textContent = document.getElementById("MaxRunLength").value;
+          document.getElementById("WordBoundaryValue").textContent = document.getElementById("WordBoundaryBias").value + "%";
+          document.getElementById("VowelValue").textContent = document.getElementById("VowelBias").value + "%";
+        }
+
+        retransformExistingText() {
+          const textarea = document.getElementById("field1");
+          const currentText = textarea.value;
+          
+          // Only retransform if there's text to transform
+          if (currentText.length > 0) {
+            const cursorPos = textarea.selectionStart;
+            const transformedText = this.transformText(currentText);
+            textarea.value = transformedText;
+            
+            // Restore cursor position (or as close as possible)
+            const newCursorPos = Math.min(cursorPos, transformedText.length);
+            textarea.setSelectionRange(newCursorPos, newCursorPos);
+          }
+        }
+
+        setPreset(type) {
+          const presets = {
+            aggressive: { flop: 8, run: 2, maxRun: 3, wordBias: 90, vowelBias: 80 },
+            balanced: { flop: 5, run: 5, maxRun: 4, wordBias: 70, vowelBias: 50 },
+            subtle: { flop: 3, run: 7, maxRun: 6, wordBias: 40, vowelBias: 30 },
+            random: {
+              flop: Math.ceil(Math.random() * 9),
+              run: Math.ceil(Math.random() * 9),
+              maxRun: Math.ceil(Math.random() * 6) + 2,
+              wordBias: Math.floor(Math.random() * 101),
+              vowelBias: Math.floor(Math.random() * 101)
             }
-            e.target.value = ret;
-            e.target.setSelectionRange(start+1, start+1);
+          };
+
+          const preset = presets[type];
+          document.getElementById("FlopFactor").value = preset.flop;
+          document.getElementById("RunFactor").value = preset.run;
+          document.getElementById("MaxRunLength").value = preset.maxRun;
+          document.getElementById("WordBoundaryBias").value = preset.wordBias;
+          document.getElementById("VowelBias").value = preset.vowelBias;
+          this.updateControlValues();
+        }
+
+        isWordBoundary(char) {
+          return /\s/.test(char);
+        }
+
+        isVowel(char) {
+          return this.vowels.has(char.toLowerCase());
+        }
+
+        updateProbability(settings, char, isWordStart) {
+          const { flopFactor, runFactor, maxRunLength, wordBoundaryBias, vowelBias } = settings;
+          
+          // Force case change if max run length reached
+          if (this.context.runLength >= maxRunLength) {
+            return this.context.lastCase === 'lower' ? 0.9 : 0.1;
+          }
+
+          let baseProbability = 0.5;
+          const flopWeight = flopFactor / 50;
+          const runWeight = runFactor / 10;
+
+          // Word boundary bias
+          if (isWordStart && this.context.lastWordCase !== null) {
+            baseProbability = this.context.lastWordCase === 'lower' ? 
+              (1 - wordBoundaryBias) : wordBoundaryBias;
+          }
+
+          // Vowel bias
+          if (this.isVowel(char)) {
+            const vowelAdjustment = (vowelBias - 0.5) * 0.3;
+            baseProbability += vowelAdjustment;
+          }
+
+          // Run length adjustment with exponential decay
+          const runPenalty = Math.pow(runWeight / 10, this.context.runLength);
+          
+          if (this.context.lastCase === 'lower') {
+            return Math.min(0.9, baseProbability + flopWeight * runPenalty);
+          } else {
+            return Math.max(0.1, baseProbability - flopWeight * runPenalty);
+          }
+        }
+
+        transformCharacter(char, settings) {
+          if (!/[a-zA-Z]/.test(char)) {
+            return char; // Return non-alphabetic characters unchanged
+          }
+
+          const isWordStart = this.context.position === 0 || this.isWordBoundary(this.context.lastChar);
+          
+          this.context.probability = this.updateProbability(settings, char, isWordStart);
+          
+          const shouldBeLower = Math.random() < this.context.probability;
+          const newCase = shouldBeLower ? 'lower' : 'upper';
+          
+          // Update context
+          if (newCase === this.context.lastCase) {
+            this.context.runLength++;
+          } else {
+            this.stats.longestRun = Math.max(this.stats.longestRun, this.context.runLength);
+            this.context.runLength = 1;
+          }
+
+          if (isWordStart) {
+            this.context.lastWordCase = newCase;
+            this.stats.words++;
+          }
+
+          this.context.lastCase = newCase;
+          this.context.lastChar = char;
+          this.context.position++;
+
+          // Update stats
+          if (newCase === 'lower') {
+            this.stats.lowerCount++;
+          } else {
+            this.stats.upperCount++;
+          }
+
+          return newCase === 'lower' ? char.toLowerCase() : char.toUpperCase();
+        }
+
+        updateStats() {
+          const total = this.stats.upperCount + this.stats.lowerCount;
+          if (total === 0) {
+            document.getElementById("StatsDisplay").textContent = "tYpE tO sEe StAtS";
+            return;
+          }
+
+          const upperPercent = Math.round((this.stats.upperCount / total) * 100);
+          const lowerPercent = 100 - upperPercent;
+          
+          document.getElementById("StatsDisplay").innerHTML = 
+            `ChArS: ${total} | UpPeR: ${upperPercent}% | LoWeR: ${lowerPercent}% | ` +
+            `LoNgEsT rUn: ${this.stats.longestRun} | WoRdS: ${this.stats.words}`;
+        }
+
+        resetStats() {
+          this.stats = {
+            upperCount: 0,
+            lowerCount: 0,
+            longestRun: 0,
+            currentRun: 0,
+            words: 0
+          };
+          this.context = {
+            lastCase: 'lower',
+            runLength: 0,
+            probability: 0.5,
+            lastWordCase: null,
+            position: 0
+          };
+        }
+
+        transformText(text) {
+          this.resetStats();
+          const settings = this.getSettings();
+          let result = '';
+          
+          for (let i = 0; i < text.length; i++) {
+            result += this.transformCharacter(text[i], settings);
+          }
+          
+          this.updateStats();
+          return result;
+        }
+
+        handleKeypress(e) {
+          const charInput = e.keyCode;
+          
+          // Only process alphabetic characters without modifier keys
+          if ((((charInput >= 65) && (charInput <= 90)) || ((charInput >= 97) && (charInput <= 122))) 
+              && !e.ctrlKey && !e.metaKey && !e.altKey) {
+            
+            const start = e.target.selectionStart;
+            const end = e.target.selectionEnd;
+            
+            // Insert the new character
+            const newChar = String.fromCharCode(charInput);
+            const beforeCursor = e.target.value.substring(0, start);
+            const afterCursor = e.target.value.substring(end);
+            const newText = beforeCursor + newChar + afterCursor;
+            
+            // Transform the entire text (optimized for consistency)
+            const transformedText = this.transformText(newText);
+            
+            e.target.value = transformedText;
+            e.target.setSelectionRange(start + 1, start + 1);
             e.preventDefault();
+          }
         }
       }
 
-      document.getElementById("field1").addEventListener("keypress", strToAksHuALly, false);
+      // Initialize the transformer
+      const transformer = new AksHuaLlyTransformer();
+      
+      // Add event listener to the textarea
+      document.getElementById("field1").addEventListener("keypress", (e) => {
+        transformer.handleKeypress(e);
+      }, false);
+
+      // Add paste event handler
+      document.getElementById("field1").addEventListener("paste", (e) => {
+        e.preventDefault();
+        
+        // Get pasted text
+        const pastedText = (e.clipboardData || window.clipboardData).getData('text');
+        
+        // Get current selection
+        const start = e.target.selectionStart;
+        const end = e.target.selectionEnd;
+        
+        // Insert pasted text at cursor position
+        const beforeCursor = e.target.value.substring(0, start);
+        const afterCursor = e.target.value.substring(end);
+        const newText = beforeCursor + pastedText + afterCursor;
+        
+        // Transform the entire text
+        const transformedText = transformer.transformText(newText);
+        
+        // Update textarea
+        e.target.value = transformedText;
+        
+        // Set cursor position after pasted content
+        const newCursorPos = start + pastedText.length;
+        e.target.setSelectionRange(newCursorPos, newCursorPos);
+      });
+
+      // Add input event for other text changes (like autocomplete, drag & drop)
+      document.getElementById("field1").addEventListener("input", (e) => {
+        // Skip if this is from our keypress handler (to avoid double processing)
+        if (e.inputType && 
+            e.inputType !== 'insertFromPaste' && 
+            e.inputType !== 'insertFromDrop' &&
+            e.inputType !== 'insertCompositionText') {
+          return;
+        }
+        
+        // Transform text for other input methods
+        const transformed = transformer.transformText(e.target.value);
+        const cursorPos = e.target.selectionStart;
+        e.target.value = transformed;
+        e.target.setSelectionRange(cursorPos, cursorPos);
+      });
 
     </script>
     </div>
